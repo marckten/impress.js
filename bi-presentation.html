@@ -1,0 +1,42 @@
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>Business Intelligence</title>
+	<link href="css/bi.css" rel="stylesheet" />
+</head>
+<body>
+	<div id="impress">
+		<div id="source" class="step" data-x="-1000" data-y="0">
+			Place for All Sources
+			<img src="images/backup-sql-server.png">
+			<img src="images/database.png">
+			<img src="images/doc.png">
+			<img src="images/doc-md.png">
+			<img src="images/excel.png">
+			<img src="images/csv.png">
+			<img src="images/mysql.png">
+			<img src="images/oracle.png">
+			<img src="images/postgres.png">
+		</div>
+		<div id="stage" class="step" data-x="0" data-y="0">
+			Area Stage
+		</div>
+		<div id="dw" class="step" data-x="1000" data-y="0">
+			Data Warehouse and Data Mart
+		</div>
+		<div id="report" class="step" data-x="2000" data-y="0">
+			Dashboard and Reporting
+		</div>
+		<div id="overview" class="step" data-x="0" data-y="0" data-scale="5">
+    </div>
+	</div>
+
+<script>
+if ("ontouchstart" in document.documentElement) { 
+    document.querySelector(".hint").innerHTML = "<p>Tap on the left or right to navigate</p>";
+}
+</script>
+<script src="js/impress.js"></script>
+<script>impress().init();</script>
+</body>
+</html>
