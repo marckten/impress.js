@@ -558,11 +558,71 @@
         
         // `next` API function goes to next step (in document order)
         var next = function () {
-            var next = steps.indexOf( activeStep ) + 1;
-            next = next < steps.length ? steps[ next ] : steps[ 0 ];
+            //var next = steps.indexOf( activeStep ) + 1;
+
+            //next = next < steps.length ? steps[ next ] : steps[ 0 ];
             
+            var next = getNextBrother();
+
             return goto(next);
         };
+
+        // drilling down
+
+        var drillDown = function(){
+
+        };
+
+        var drillUp =  function(){
+           // getNextBrother();
+        };
+
+        function getNextBrother(){
+            
+            var activeIndex = steps.indexOf(activeStep);
+            var nextIndex = activeIndex;
+
+            if (nextIndex === steps.length -1){
+                return steps[0];
+            }
+           
+            for (var i = activeIndex + 1; i < steps.length ; i++) {
+ 
+                var step = steps[i];
+                
+                if(!step.id.includes(activeStep.id)){
+                    nextIndex = i;
+                    break;
+                }
+
+            }
+
+            return steps[nextIndex];
+        }
+
+         function getPrevBrother(){
+            
+            var activeIndex = steps.indexOf(activeStep);
+            var nextIndex = activeIndex;
+           
+            for (var i = activeIndex + 1; i < steps.length ; i++) {
+                if(i===steps.length){
+                    break;
+                }
+
+                var step = steps[i];
+                
+                if(!step.id.includes(activeStep.id)){
+                    nextIndex = i;
+                    break;
+                }
+
+            }
+
+            return steps[nextIndex];
+        }
+
+        
         
         // Adding some useful classes to step elements.
         //
@@ -635,7 +695,9 @@
             init: init,
             goto: goto,
             next: next,
-            prev: prev
+            prev: prev,
+            drillDown : drillDown,
+            drillUp : drillUp
         });
 
     };
@@ -706,16 +768,21 @@
                 switch( event.keyCode ) {
                     case 33: // pg up
                     case 37: // left
-                    case 38: // up
                              api.prev();
+                             break;
+                    case 38: // up
+                             api.drillUp();
                              break;
                     case 9:  // tab
                     case 32: // space
                     case 34: // pg down
                     case 39: // right
-                    case 40: // down
                              api.next();
                              break;
+                    case 40: // down
+                             api.drillDown();
+                             break;
+                             
                 }
                 
                 event.preventDefault();
