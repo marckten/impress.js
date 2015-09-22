@@ -332,16 +332,39 @@
        ///dfsdf
         var structureSteps = function( el, idx , steps ){
             
-            el['childrenSteps'] = []; 
-            for (var i = 0; i < steps.length; i++) {
+            var index = steps.indexOf(el);
+            el['childrenSteps'] = el['childrenSteps']  || []; 
+            for (var i = index; i < steps.length; i++) {
                 var step = steps[i].id;
                 var name = step.split('-'); 
                 if(name[0] === el.id && name.length > 1){
                     steps[i]['parentStep'] = el;
+                    getNietos(steps[i], steps);
                     el['childrenSteps'].push(steps[i]);
+                    
                 }
+                //if(name[1])
             };
         };
+
+        function getNietos(father, steps){
+            var nameFather = father.id.split('-');
+            father['childrenSteps'] = father['childrenSteps'] || [];
+            var index = steps.indexOf(father);
+            if (nameFather[1]){
+                for (var i = index; i < steps.length; i++) {
+                var step = steps[i].id;
+                var name = step.split('-'); 
+                    if(name[0] === nameFather[1] && name.length > 1){
+                        steps[i]['parentStep'] = father;
+                        getNietos(steps[i], steps);
+                        father['childrenSteps'].push(steps[i]);
+                        
+                    }
+
+                };
+            }
+        }
 
         
         // `init` API function that initializes (and runs) the presentation.
@@ -407,11 +430,13 @@
             steps.forEach( initStep );
             steps.forEach(structureSteps);
 
+            var aux = [];
             for (var i = 0; i < steps.length; i++) {
-                if(steps[i].id.includes('-')){
-                   delete steps[i];
+                if(!steps[i].id.includes('-')){
+                   aux.push(steps[i]);
                 }
             }
+            steps = aux;
 
             // set a default initial state of the canvas
             currentState = {
@@ -578,18 +603,12 @@
             var prev;
 
             if (!parent){
-                var newSteps = [];
-                
-                steps.forEach(function (el,index){
-                    newSteps.push(el);
-                });
-
-                prev = newSteps.indexOf(activeStep) - 1 ;
-                prev = prev >= 0 ? newSteps[ prev ] : newSteps[ newSteps.length-1 ];
+                prev = steps.indexOf(activeStep) - 1 ;
+                prev = prev >= 0 ? steps[ prev ] : steps[ steps.length-1 ];
             }
             else{
 
-                prev = parent.childrenSteps.indexOf(activeStep) +1 ;
+                prev = parent.childrenSteps.indexOf(activeStep) - 1 ;
                 prev = prev >= 0 ? parent.childrenSteps[ prev ] : parent.childrenSteps[ parent.childrenSteps.length-1 ];
             }
             
@@ -602,14 +621,9 @@
             var next;
 
             if (!parent){
-                var newSteps = [];
-                
-                steps.forEach(function (el,index){
-                    newSteps.push(el);
-                });
 
-                next = newSteps.indexOf(activeStep) +1 ;
-                next = next < newSteps.length ? newSteps[ next ] : newSteps[ 0 ];
+                next = steps.indexOf(activeStep) +1 ;
+                next = next < steps.length ? steps[ next ] : steps[ 0 ];
             }
             else{
 
@@ -630,8 +644,8 @@
         };
 
         var drillUp =  function(){
-           if (activeStep.partenStep){
-                return goto(activeStep.partenStep);
+           if (activeStep.parentStep){
+                return goto(activeStep.parentStep);
            }
            return goto(activeStep);
         };
@@ -867,8 +881,8 @@
         // rescale presentation when window is resized
         window.addEventListener("resize", throttle(function () {
             // force going to active step again, to trigger rescaling
-            api.goto( document.querySelector(".step.active"), 500 );
-        }, 250), false);
+            api.goto( document.querySelector(".step.active"), 250 );
+        }, 150), false);
         
     }, false);
         
