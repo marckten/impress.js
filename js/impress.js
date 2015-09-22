@@ -339,7 +339,7 @@
                 var name = step.split('-'); 
                 if(name[0] === el.id && name.length > 1){
                     steps[i]['parentStep'] = el;
-                    getNietos(steps[i], steps);
+                    getGrandchildren(steps[i], steps);
                     el['childrenSteps'].push(steps[i]);
                     
                 }
@@ -347,7 +347,7 @@
             };
         };
 
-        function getNietos(father, steps){
+        function getGrandchildren(father, steps){
             var nameFather = father.id.split('-');
             father['childrenSteps'] = father['childrenSteps'] || [];
             var index = steps.indexOf(father);
@@ -357,7 +357,7 @@
                 var name = step.split('-'); 
                     if(name[0] === nameFather[1] && name.length > 1){
                         steps[i]['parentStep'] = father;
-                        getNietos(steps[i], steps);
+                        getGrandchildren(steps[i], steps);
                         father['childrenSteps'].push(steps[i]);
                         
                     }
