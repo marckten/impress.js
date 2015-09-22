@@ -318,6 +318,7 @@
             
             stepsData["impress-" + el.id] = step;
             
+
             css(el, {
                 position: "absolute",
                 transform: "translate(-50%,-50%)" +
@@ -327,6 +328,21 @@
                 transformStyle: "preserve-3d"
             });
         };
+
+       ///dfsdf
+        var structureSteps = function( el, idx , steps ){
+            
+            el['childrenSteps'] = []; 
+            for (var i = 0; i < steps.length; i++) {
+                var step = steps[i].id;
+                var name = step.split('-'); 
+                if(name[0] === el.id && name.length > 1){
+                    steps[i]['parentStep'] = el;
+                    el['childrenSteps'].push(steps[i]);
+                }
+            };
+        };
+
         
         // `init` API function that initializes (and runs) the presentation.
         var init = function () {
@@ -389,7 +405,14 @@
             // get and init steps
             steps = $$(".step", root);
             steps.forEach( initStep );
-            
+            steps.forEach(structureSteps);
+
+            for (var i = 0; i < steps.length; i++) {
+                if(steps[i].id.includes('-')){
+                   delete steps[i];
+                }
+            }
+
             // set a default initial state of the canvas
             currentState = {
                 translate: { x: 0, y: 0, z: 0 },
@@ -550,19 +573,49 @@
         
         // `prev` API function goes to previous step (in document order)
         var prev = function () {
-            var prev = steps.indexOf( activeStep ) - 1;
-            prev = prev >= 0 ? steps[ prev ] : steps[ steps.length-1 ];
+
+            var parent = activeStep.parentStep ;
+            var prev;
+
+            if (!parent){
+                var newSteps = [];
+                
+                steps.forEach(function (el,index){
+                    newSteps.push(el);
+                });
+
+                prev = newSteps.indexOf(activeStep) - 1 ;
+                prev = prev >= 0 ? newSteps[ prev ] : newSteps[ newSteps.length-1 ];
+            }
+            else{
+
+                prev = parent.childrenSteps.indexOf(activeStep) +1 ;
+                prev = prev >= 0 ? parent.childrenSteps[ prev ] : parent.childrenSteps[ parent.childrenSteps.length-1 ];
+            }
             
             return goto(prev);
         };
         
         // `next` API function goes to next step (in document order)
         var next = function () {
-            //var next = steps.indexOf( activeStep ) + 1;
+            var parent = activeStep.parentStep ;
+            var next;
 
-            //next = next < steps.length ? steps[ next ] : steps[ 0 ];
-            
-            var next = getNextBrother();
+            if (!parent){
+                var newSteps = [];
+                
+                steps.forEach(function (el,index){
+                    newSteps.push(el);
+                });
+
+                next = newSteps.indexOf(activeStep) +1 ;
+                next = next < newSteps.length ? newSteps[ next ] : newSteps[ 0 ];
+            }
+            else{
+
+                next = parent.childrenSteps.indexOf(activeStep) +1 ;
+                next = next < parent.childrenSteps.length ? parent.childrenSteps[ next ] : parent.childrenSteps[ 0 ];
+            }
 
             return goto(next);
         };
@@ -570,57 +623,20 @@
         // drilling down
 
         var drillDown = function(){
-
+            if (activeStep.childrenSteps && activeStep.childrenSteps.length > 0 ){
+               return goto(activeStep.childrenSteps[0]);
+            }
+            return goto(activeStep);
         };
 
         var drillUp =  function(){
-           // getNextBrother();
+           if (activeStep.partenStep){
+                return goto(activeStep.partenStep);
+           }
+           return goto(activeStep);
         };
 
-        function getNextBrother(){
-            
-            var activeIndex = steps.indexOf(activeStep);
-            var nextIndex = activeIndex;
-
-            if (nextIndex === steps.length -1){
-                return steps[0];
-            }
-           
-            for (var i = activeIndex + 1; i < steps.length ; i++) {
- 
-                var step = steps[i];
-                
-                if(!step.id.includes(activeStep.id)){
-                    nextIndex = i;
-                    break;
-                }
-
-            }
-
-            return steps[nextIndex];
-        }
-
-         function getPrevBrother(){
-            
-            var activeIndex = steps.indexOf(activeStep);
-            var nextIndex = activeIndex;
-           
-            for (var i = activeIndex + 1; i < steps.length ; i++) {
-                if(i===steps.length){
-                    break;
-                }
-
-                var step = steps[i];
-                
-                if(!step.id.includes(activeStep.id)){
-                    nextIndex = i;
-                    break;
-                }
-
-            }
-
-            return steps[nextIndex];
-        }
+         
 
         
         
