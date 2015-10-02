@@ -1,0 +1,95 @@
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>Business Intelligence</title>
+	<link href="css/bi.css" rel="stylesheet" />
+</head>
+<body>
+	<div id="impress">
+     
+     
+
+		<div id="source" class="step" data-x="-1000" data-y="0">
+			
+            <div style="position: absolute; left: 10px; top: -200px;">Data Sources</div>
+			
+            <div style="position: absolute; left: 10px; top: -100px; height:100px;" > <img src="images/source/excel.png" height="100%"> </div>
+            <div style="position: absolute; left: 30px; top: 80px; height:300px;"> <img src="images/source/excel.png" height="100%"> </div>
+            <div style="position: absolute; left: 50px; top: 120px; height:300px;"> <img src="images/source/excel.png" height="100%"> </div>
+            <div style="position: absolute; left: 70px; top: 30px; height:300px;"> <img src="images/source/excel.png" height="100%"> </div>
+
+			
+			<img src="images/source/database-mysql.png" width="50" height="50">
+			<img src="images/source/oracle.jpg" width="50" height="50">
+			<img src="images/source/postgres.png" width="50" height="50">
+            
+            <div style="position: absolute; left: 10px; top: 150px; height:350px;"> <img src="images/source/csv.png" > </div>
+            <div style="position: absolute; left: 30px; top: 180px;"> <img src="images/source/csv.png"></div>
+            <div style="position: absolute; left: 50px; top: 1120px;"> <img src="images/source/csv.png"> </div>
+            
+            
+            
+            
+            
+            <div style="position: absolute; left: 10px; top: 130px; "> <img src="images/source/database-mysql.png"> </div>
+            <div style="position: absolute; left: 30px; top: 1800px; "> <img src="images/source/oracle.png"> </div>
+            <div style="position: absolute; left: 50px; top: 120px; "> <img src="images/source/excel.png"> </div>
+            <div style="position: absolute; left: 70px; top: 130px; "> <img src="images/source/postgres.png"> </div>
+
+
+            <img src="images/source/backup-sql-server.png" width="50" height="50">
+            <img src="images/source/database.png" width="50" height="50">
+            <img src="images/source/doc.png" width="50" height="50">
+            <img src="images/source/doc-md.png" width="50" height="50">
+            
+            
+		</div>
+
+
+		<div id="text" class="step" data-x="-2000" data-y="0" data-z="-2000">
+        	<img src="images/data/text.png">
+      	</div>
+        <div id="number" class="step" data-x="-2000" data-y="0" data-z="-2000">
+            <img src="images/data/number.png" >
+        </div>
+        <div id="music" class="step" data-x="-2000" data-y="0" data-z="-2000">
+            <img src="images/data/music_note.png">
+        </div>
+        <div id="video" class="step" data-x="-2000" data-y="0" data-z="-2000">
+            <img src="images/data/video.png">
+        </div>  
+
+			<div id="source-first" class="step slide" data-x="-1000" data-y="0" data-z="-1000" >Hola estoy dentro</div>
+				<div id="first-test" class="step" data-x="-1000" data-y="0" data-z="-1500" >En el fondo</div>
+			<div id="source-second" class="step slide" data-x="0" data-y="0" data-z="-1000" >I am second</div>
+
+		<div id="stage" class="step" data-x="0" data-y="0">
+			Area Stage
+			<img src="images/stage/dataconvert.png" width="50" height="50">
+			<img src="images/stage/home-tab-excel.png" width="50" height="50">
+			<img src="images/stage/icon-clean.png" width="50" height="50">
+			<img src="images/stage/limpiar-base-de-datos.png" width="50" height="50">
+			<img src="images/stage/clean-shower.png" width="50" height="50">
+			<img src="images/stage/recicle.png" width="50" height="50">
+
+		</div>
+		<div id="dw" class="step" data-x="1000" data-y="0">
+			Data Warehouse and Data Mart
+		</div>
+		<div id="report" class="step" data-x="2000" data-y="0">
+			Dashboard and Reporting
+		</div>
+		<div id="overvsssie" class="step" data-x="0" data-y="0" data-scale="2">
+            <img src="images/bi/life_cycle.png">
+        </div>
+	</div>
+
+<script>
+if ("ontouchstart" in document.documentElement) { 
+    document.querySelector(".hint").innerHTML = "<p>Tap on the left or right to navigate</p>";
+}
+</script>
+<script src="js/impress.js"></script>
+<script>impress().init();</script>
+</body>
+</html>
