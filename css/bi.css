@@ -424,3 +424,11 @@ a:focus {
 */
 
 
+img{
+
+    height:100%;
+}
+
+div{
+    position: absolute;
+}
