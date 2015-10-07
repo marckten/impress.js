@@ -63,21 +63,24 @@
             </div>  
 
         <!-- Area Stage--> 
-		<div id="stage" class="step" data-x="0" data-y="0">
+		<div id="stage" class="step" data-x="0" data-y="0" tabindex="0">
 
             <!-- Title --> 
             <div style="position: absolute; left: 10px; top: -200px;">Area Stage</div>
+            <!-- Sarch --> 
+            <div style="left: 200px; top: 100px; height:250px;" > <img src="images/stage/bisearch.png"> search</div>
             <!-- Data Convert-->
-            <div style="left: 200px; top: -110px; height:90px;" > <img src="images/stage/dataconvert.png" > </div>
-			<div style="left: 400px; top: -110px; height:90px;" > <img src="images/stage/home-tab-excel.png" > </div>
+            <div style="left: 200px; top: -150px; height:90px;" > <img src="images/stage/dataconvert.png" > </div>
+			<div style="left: 400px; top: 0px; height:90px;" > <img src="images/stage/home-tab-excel.png" > </div>
             <div style="left: 500px; top: -110px; height:90px;" > <img src="images/stage/icon-clean.png" > </div>
-            <div style="left: 600px; top: -110px; height:90px;" > <img src="images/stage/limpiar-base-de-datos.png" > </div>
+            <div style="left: 550px; top: -110px; height:90px;" > <img src="images/stage/limpiar-base-de-datos.png" > </div>
             <div style="left: 10px; top: 0px; height:90px;" > <img src="images/stage/recicle.png" > </div>
             
             <div style="left: 10px; top: 100px; height:90px;" > <img src="images/stage/diskclean.png" > </div>
             <div style="left: 10px; top: 210px; height:90px;" > <img src="images/stage/think.png" > </div>
-            <div style="left: 10px; top: 310px; height:90px;" > <img src="images/stage/tools.png" > </div>
-            <div style="left: 10px; top: 410px; height:90px;" > <img src="images/stage/bisearch.png"> </div>
+            <div style="left: 400px; top: 210px; height:90px;" > <img src="images/stage/tools.png" > </div>
+            <div style="left: 400px; top: 210px; height:90px;" > <img src="images/stage/recovery.png" > </div>
+            <div style="left: 80px; top: -150px; height:90px;" > <img src="images/stage/lupa2.png" > </div>
 			
 		</div>
 		<div id="dw" class="step" data-x="1000" data-y="0">
@@ -87,17 +90,28 @@
 			Dashboard and Reporting
 		</div>
 		<div id="overvsssie" class="step" data-x="0" data-y="0" data-scale="2">
-            <img src="images/bi/life_cycle.png">
+            <div style="left: 0px; top: -200px; height:600px;" > <img src="images/bi/life_cycle.png"></div>
         </div>
 	</div>
 
 <script src="js/jquery-1.11.3.js"></script>
 <script src="js/impress.js"></script>
-<script>impress().init();</script>
+
 <script>
 $(function() {
-  //alert("Hello World");
+  
+
+  var ddiv=document.getElementById("source");
+    
+  ddiv.myFunction = function (txt) { alert("This is a DIV: "+txt); }
+
+    //$('#stage').focus(function(){
+      //  alert("I am in stage");
+    //});
+
+    impress().init();
 });
 </script>
+
 </body>
 </html>

@@ -339,6 +339,7 @@
                 var name = step.split('-'); 
                 if(name[0] === el.id && name.length > 1){
                     steps[i]['parentStep'] = el;
+                    //TODO
                     getGrandchildren(steps[i], steps);
                     el['childrenSteps'].push(steps[i]);
                     
@@ -368,7 +369,7 @@
 
         
         // `init` API function that initializes (and runs) the presentation.
-        var init = function () {
+        var init = function (customEvents) {
             if (initialized) { return; }
             
             // First we set up the viewport for mobile devices.
