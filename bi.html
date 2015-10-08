@@ -108,9 +108,14 @@ $(function() {
 
     var customEvents = {
         source: [ 
-            function() { alert("Hola"); } ,
-            function() { alert("Hola1"); } ,
-            function() { alert("Hola2"); } 
+            {
+                status : 'new',
+                event: function() { alert("Hola"); }
+            },
+            {
+                status : 'new',
+                event: function() { alert("Hola"); }
+            }
         ]
        
     };

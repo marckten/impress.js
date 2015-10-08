@@ -332,12 +332,7 @@
        ///dfsdf
         var structureSteps = function( el, idx , steps ){
             
-            if (el.customEvents[0])
-            {
-
-              el.customEvents[0]();
-            }
-
+           
             var index = steps.indexOf(el);
             el['childrenSteps'] = el['childrenSteps']  || []; 
             for (var i = index; i < steps.length; i++) {
@@ -663,6 +658,13 @@
            return goto(activeStep);
         };
 
+        var execEvent = function(){
+            if (activeStep.customEvents[0])
+            {
+              activeStep.customEvents[0].event();
+            }
+
+        };
          
 
         
@@ -740,7 +742,8 @@
             next: next,
             prev: prev,
             drillDown : drillDown,
-            drillUp : drillUp
+            drillUp : drillUp,
+            execEvent : execEvent
         });
 
     };
@@ -818,6 +821,8 @@
                              break;
                     case 9:  // tab
                     case 32: // space
+                            api.execEvent();
+                            break;
                     case 34: // pg down
                     case 39: // right
                              api.next();
