@@ -332,6 +332,12 @@
        ///dfsdf
         var structureSteps = function( el, idx , steps ){
             
+            if (el.customEvents[0])
+            {
+
+              el.customEvents[0]();
+            }
+
             var index = steps.indexOf(el);
             el['childrenSteps'] = el['childrenSteps']  || []; 
             for (var i = index; i < steps.length; i++) {
@@ -429,6 +435,12 @@
             // get and init steps
             steps = $$(".step", root);
             steps.forEach( initStep );
+
+            for (var i = 0; i < steps.length; i++) {
+                steps[i]['customEvents'] = customEvents[steps[i].id] || [];
+            }
+
+
             steps.forEach(structureSteps);
 
             var aux = [];

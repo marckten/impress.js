@@ -105,11 +105,20 @@ $(function() {
     
   ddiv.myFunction = function (txt) { alert("This is a DIV: "+txt); }
 
-    //$('#stage').focus(function(){
-      //  alert("I am in stage");
-    //});
 
-    impress().init();
+    var customEvents = {
+        source: [ 
+            function() { alert("Hola"); } ,
+            function() { alert("Hola1"); } ,
+            function() { alert("Hola2"); } 
+        ]
+       
+    };
+
+
+    
+
+    impress().init(customEvents);
 });
 </script>
 
