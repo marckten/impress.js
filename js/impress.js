@@ -431,11 +431,12 @@
             steps = $$(".step", root);
             steps.forEach( initStep );
 
-            for (var i = 0; i < steps.length; i++) {
-                steps[i]['customEvents'] = customEvents[steps[i].id] || [];
+            if(customEvents){
+                for (var i = 0; i < steps.length; i++) {
+                    steps[i]['customEvents'] = customEvents[steps[i].id] || [];
+                }    
             }
-
-
+            
             steps.forEach(structureSteps);
 
             var aux = [];
